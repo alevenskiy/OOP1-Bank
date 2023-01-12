@@ -45,9 +45,20 @@ namespace Task2
 
         }
 
-        public void SaveClient()
+        public bool SaveClient()
         {
-            client.Serialize("client.json");
+            if (PhoneNumberChange(mainWindow.text_phone.Text))
+            {
+                client.surname = mainWindow.text_surname.Text;
+                client.name = mainWindow.text_name.Text;
+                client.secondName = mainWindow.text_secondname.Text;
+                client.phoneNumber = mainWindow.text_phone.Text;
+                client.passportNumber = mainWindow.text_passport.Text;
+
+                client.Serialize("client.json");
+                return true;
+            }
+            return false;
         }
     }
 }

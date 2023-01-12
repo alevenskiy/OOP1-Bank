@@ -33,11 +33,9 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100*"/>
                             <ColumnDefinition Width="100*"/>
-                            <ColumnDefinition Width="15*"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0">Surname</Label>
                         <TextBox x:Name="text_surname" Grid.Column="1" VerticalContentAlignment="Center" FocusableChanged="text_surname_FocusableChanged"/>
-                        <Button x:Name="butt_surname" Grid.Column="2" Content="chng" Grid.ColumnSpan="2" Height="26" VerticalAlignment="Top" Click="butt_surname_Click" />
                     </Grid>
                 </Border>
             </StackPanel>
@@ -47,11 +45,9 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100*"/>
                             <ColumnDefinition Width="100*"/>
-                            <ColumnDefinition Width="15*"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0">Name</Label>
                         <TextBox x:Name="text_name" Grid.Column="1" VerticalContentAlignment="Center" FocusableChanged="text_name_FocusableChanged"/>
-                        <Button x:Name="butt_name" Grid.Column="2" Content="chng" Grid.ColumnSpan="2" Height="26" VerticalAlignment="Top" Click="butt_name_Click" />
                     </Grid>
                 </Border>
             </StackPanel>
@@ -61,11 +57,9 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100*"/>
                             <ColumnDefinition Width="100*"/>
-                            <ColumnDefinition Width="15*"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0">Second Name</Label>
                         <TextBox x:Name="text_secondname" Grid.Column="1" VerticalContentAlignment="Center" FocusableChanged="text_secondname_FocusableChanged"/>
-                        <Button x:Name="butt_secondname" Grid.Column="2" Content="chng" Grid.ColumnSpan="2" Height="26" VerticalAlignment="Top" Click="butt_secondname_Click" />
                     </Grid>
                 </Border>
             </StackPanel>
@@ -75,11 +69,9 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100*"/>
                             <ColumnDefinition Width="100*"/>
-                            <ColumnDefinition Width="15*"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0">Phone Number</Label>
                         <TextBox x:Name="text_phone" Grid.Column="1" VerticalContentAlignment="Center" FocusableChanged="text_phone_FocusableChanged"/>
-                        <Button x:Name="butt_phone" Grid.Column="2" Content="chng" Grid.ColumnSpan="2" Height="26" VerticalAlignment="Top" Click="butt_phone_Click" />
                     </Grid>
                 </Border>
             </StackPanel>
@@ -89,11 +81,9 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100*"/>
                             <ColumnDefinition Width="100*"/>
-                            <ColumnDefinition Width="15*"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0">Passport Number</Label>
                         <TextBox x:Name="text_passport" Grid.Column="1" VerticalContentAlignment="Center" FocusableChanged="text_passport_FocusableChanged"/>
-                        <Button x:Name="butt_passport" Grid.Column="2" Content="chng" Grid.ColumnSpan="2" Height="26" VerticalAlignment="Top" Click="butt_passport_Click" />
                     </Grid>
                 </Border>
             </StackPanel>
