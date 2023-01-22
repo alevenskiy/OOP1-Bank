@@ -6,7 +6,59 @@
         xmlns:local="clr-namespace:Task3"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="LightYellow">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="Butt_Download" Grid.Column="0" Grid.Row="0" Content="Download Client" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="100" Click="Butt_Download_Click"/>
+
+        <ComboBox x:Name="ComboBox_Position" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200" SelectionChanged="ComboBox_Position_SelectionChanged" >
+            <TextBlock x:Name="Pos_Consultant" Text="Consultant"/>
+            <TextBlock x:Name="Pos_Manager" Text="Manager"/>
+        </ComboBox>
+
+        <DataGrid Grid.Column="1" Grid.Row="1">
+            
+            
+        </DataGrid>
+
+        <StackPanel Grid.Column="2" Grid.Row="1" Margin=" 5 0">
+            <DockPanel>
+                <TextBlock Text="Last Edit Time"/>
+                <TextBlock x:Name="text_edittime" Text="Edit Time" HorizontalAlignment="Right"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Edit Data"/>
+                <TextBlock x:Name="text_editdata" Text="Edit Data" HorizontalAlignment="Right"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Edit Type"/>
+                <TextBlock x:Name="text_edittype" Text="Edit Type" HorizontalAlignment="Right"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Edit User"/>
+                <TextBlock x:Name="text_edituser" Text="Edit User" HorizontalAlignment="Right"/>
+            </DockPanel>
+        </StackPanel>
         
+        <Button x:Name="Butt_Save" Grid.Column="0" Grid.Row="2" Content="Save Client" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="100" Click="Butt_Save_Click"/>
+
+        <Grid Grid.Row="2" Grid.Column="1" x:Name="grid_supp" Margin="10">
+            <Grid.Background>
+                <SolidColorBrush Color="#FFD52323" Opacity="0.5"/>
+            </Grid.Background>
+
+            <TextBlock x:Name="text_supp" Text="Error" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
+        </Grid>
+
     </Grid>
 </Window>
