@@ -27,8 +27,15 @@
         </ComboBox>
 
         <DataGrid Grid.Column="1" Grid.Row="1">
-            
-            
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Surname" x:Name="col_surname"/>
+                <DataGridTextColumn Header="Name" x:Name="col_name"/>
+                <DataGridTextColumn Header="Second Name" x:Name="col_secname"/>
+                <DataGridTextColumn Header="Phone" x:Name="col_phone"/>
+                <DataGridTextColumn Header="Passport" x:Name="col_passport"/>
+            </DataGrid.Columns>
+
+
         </DataGrid>
 
         <StackPanel Grid.Column="2" Grid.Row="1" Margin=" 5 0">
