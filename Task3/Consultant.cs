@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,9 @@ namespace Task3
 
         protected Client client;
         protected MainWindow mainWindow;
+        protected string[] changedData = null;
+        protected string[] changedType = null;
+
 
         public Consultant(MainWindow mainWindow)
         {
@@ -41,7 +45,12 @@ namespace Task3
             {
                 mainWindow.grid_supp.Visibility = Visibility.Collapsed;
                 client.phoneNumber = newPhone;
+
+                changedData = new string[] { " phone"};
+                changedType = new string[] { " change" };
+
                 return true;
+
             }
 
         }
@@ -59,6 +68,17 @@ namespace Task3
             //    client.Serialize("client.json");
             //    return true;
             //}
+            client.surname = mainWindow.datagrid_clients.SelectedItems[0].ToString(); // еще проверять надо работает ли этот код.. эх
+            client.name = mainWindow.datagrid_clients.SelectedItems[1].ToString();
+            client.secondName = mainWindow.datagrid_clients.SelectedItems[2].ToString();
+            client.phoneNumber = mainWindow.datagrid_clients.SelectedItems[3].ToString();
+            client.passportNumber = mainWindow.datagrid_clients.SelectedItems[4].ToString();
+
+            client.editTime = DateTime.Now;
+            client.editedData = changedData;
+            client.editType = changedType;
+            client.editUser = "Client";
+
             return false;
         }
 

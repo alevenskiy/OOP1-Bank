@@ -26,7 +26,7 @@
             <TextBlock x:Name="Pos_Manager" Text="Manager"/>
         </ComboBox>
 
-        <DataGrid Grid.Column="1" Grid.Row="1">
+        <DataGrid Grid.Column="1" Grid.Row="1" x:Name="datagrid_clients" SelectionChanged="datagrid_clients_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Surname" x:Name="col_surname"/>
                 <DataGridTextColumn Header="Name" x:Name="col_name"/>

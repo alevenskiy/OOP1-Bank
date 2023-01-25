@@ -63,10 +63,10 @@ namespace Task3
                     consultant = new Consultant(this);
                 isConsultant = true;
 
-                //this.text_surname.Focusable = false;
-                //this.text_name.Focusable = false;
-                //this.text_secondname.Focusable = false;
-                //this.text_passport.Focusable = false;
+                this.datagrid_clients.Columns[0].IsReadOnly = true;
+                this.datagrid_clients.Columns[1].IsReadOnly = true;
+                this.datagrid_clients.Columns[2].IsReadOnly = true;
+                this.datagrid_clients.Columns[4].IsReadOnly = true;
             }
             else
             {
@@ -74,10 +74,22 @@ namespace Task3
                     manager = new Manager(this);
                 isConsultant = false;
 
-                //this.text_surname.Focusable = true;
-                //this.text_name.Focusable = true;
-                //this.text_secondname.Focusable = true;
-                //this.text_passport.Focusable = true;
+                this.datagrid_clients.Columns[0].IsReadOnly = false;
+                this.datagrid_clients.Columns[1].IsReadOnly = false;
+                this.datagrid_clients.Columns[2].IsReadOnly = false;
+                this.datagrid_clients.Columns[4].IsReadOnly = false;
+            }
+        }
+
+        private void datagrid_clients_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (isConsultant)
+            {
+
+            }
+            else
+            {
+                
             }
         }
     }
