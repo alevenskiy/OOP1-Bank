@@ -22,7 +22,7 @@ namespace Task3
     {
         Consultant consultant;
         Manager manager;
-        bool isConsultant;
+        bool isConsultant = false;
 
         public MainWindow()
         {
@@ -31,28 +31,12 @@ namespace Task3
 
         private void Butt_Download_Click(object sender, RoutedEventArgs e)
         {
-            if (isConsultant)
-                consultant.LoadClient();
-            else
-                manager.LoadClient();
+            
         }
 
         private void Butt_Save_Click(object sender, RoutedEventArgs e)
         {
-            if (isConsultant)
-            {
-                if (consultant.SaveClient())
-                {
-                    MessageBox.Show("Data saved", "Save Completed", MessageBoxButton.OK);
-                }
-            }
-            else
-            {
-                if (manager.SaveClient())
-                {
-                    MessageBox.Show("Data saved", "Save Completed", MessageBoxButton.OK);
-                }
-            }
+
         }
 
         private void ComboBox_Position_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -62,35 +46,18 @@ namespace Task3
                 if (consultant == null)
                     consultant = new Consultant(this);
                 isConsultant = true;
-
-                this.datagrid_clients.Columns[0].IsReadOnly = true;
-                this.datagrid_clients.Columns[1].IsReadOnly = true;
-                this.datagrid_clients.Columns[2].IsReadOnly = true;
-                this.datagrid_clients.Columns[4].IsReadOnly = true;
             }
             else
             {
                 if (manager == null)
                     manager = new Manager(this);
                 isConsultant = false;
-
-                this.datagrid_clients.Columns[0].IsReadOnly = false;
-                this.datagrid_clients.Columns[1].IsReadOnly = false;
-                this.datagrid_clients.Columns[2].IsReadOnly = false;
-                this.datagrid_clients.Columns[4].IsReadOnly = false;
             }
         }
 
         private void datagrid_clients_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (isConsultant)
-            {
+        { 
 
-            }
-            else
-            {
-                
-            }
         }
     }
 }

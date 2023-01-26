@@ -11,7 +11,7 @@ namespace Task3
     internal class Consultant
     {
 
-        protected Client client;
+        protected Clients clients;
         protected MainWindow mainWindow;
         protected string[] changedData = null;
         protected string[] changedType = null;
@@ -22,65 +22,45 @@ namespace Task3
             this.mainWindow = mainWindow;
         }
 
-        public void LoadClient()
+        public Clients GetClients()
         {
-            client = new Client().Deserialize("client.json");
-            //mainWindow.text_surname.Text = client.surname;
-            //mainWindow.text_name.Text = client.name;
-            //mainWindow.text_secondname.Text = client.secondName;
-            //mainWindow.text_phone.Text = client.phoneNumber;
-            //if (client.passportNumber != "")
-            //    mainWindow.text_passport.Text = "*******************";
+            if(clients == null)
+            {
+                clients = new Clients().Deserialize("client.json");
+            }
+
+            return clients;
         }
 
-        public bool PhoneNumberChange(string newPhone)
+        public void SetClients()
+        {
+            clients.Serialize("client.json");
+        }
+
+        public bool PhoneNumberChange(Client client, string newPhone)
         {
             if (newPhone == "")
             {
-                mainWindow.grid_supp.Visibility = Visibility.Visible;
-                mainWindow.text_supp.Text = "Phone number can not be empty";
                 return false;
             }
             else
             {
-                mainWindow.grid_supp.Visibility = Visibility.Collapsed;
-                client.phoneNumber = newPhone;
+                client.editTime = DateTime.Now;
+                client.editUser = "Client";
+                client.editedData.Add("Phone");
 
-                changedData = new string[] { " phone"};
-                changedType = new string[] { " change" };
+                if (client.phone == "")
+                {
+                    client.editType.Add("Add");
+                }
+                else
+                {
+                    client.editType.Add("Change");
+                }
 
+                client.phone = newPhone;
                 return true;
-
             }
-
         }
-
-        public bool SaveClient()
-        {
-            //if (PhoneNumberChange(mainWindow.text_phone.Text))
-            //{
-            //    client.surname = mainWindow.text_surname.Text;
-            //    client.name = mainWindow.text_name.Text;
-            //    client.secondName = mainWindow.text_secondname.Text;
-            //    client.phoneNumber = mainWindow.text_phone.Text;
-            //    client.passportNumber = mainWindow.text_passport.Text;
-
-            //    client.Serialize("client.json");
-            //    return true;
-            //}
-            client.surname = mainWindow.datagrid_clients.SelectedItems[0].ToString(); // еще проверять надо работает ли этот код.. эх
-            client.name = mainWindow.datagrid_clients.SelectedItems[1].ToString();
-            client.secondName = mainWindow.datagrid_clients.SelectedItems[2].ToString();
-            client.phoneNumber = mainWindow.datagrid_clients.SelectedItems[3].ToString();
-            client.passportNumber = mainWindow.datagrid_clients.SelectedItems[4].ToString();
-
-            client.editTime = DateTime.Now;
-            client.editedData = changedData;
-            client.editType = changedType;
-            client.editUser = "Client";
-
-            return false;
-        }
-
     }
 }

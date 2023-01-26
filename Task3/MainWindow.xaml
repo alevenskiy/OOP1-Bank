@@ -21,21 +21,12 @@
 
         <Button x:Name="Butt_Download" Grid.Column="0" Grid.Row="0" Content="Download Client" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="100" Click="Butt_Download_Click"/>
 
-        <ComboBox x:Name="ComboBox_Position" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200" SelectionChanged="ComboBox_Position_SelectionChanged" >
+        <ComboBox x:Name="ComboBox_Position" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200" SelectionChanged="ComboBox_Position_SelectionChanged" SelectedIndex="1" >
             <TextBlock x:Name="Pos_Consultant" Text="Consultant"/>
             <TextBlock x:Name="Pos_Manager" Text="Manager"/>
         </ComboBox>
 
-        <DataGrid Grid.Column="1" Grid.Row="1" x:Name="datagrid_clients" SelectionChanged="datagrid_clients_SelectionChanged">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Surname" x:Name="col_surname"/>
-                <DataGridTextColumn Header="Name" x:Name="col_name"/>
-                <DataGridTextColumn Header="Second Name" x:Name="col_secname"/>
-                <DataGridTextColumn Header="Phone" x:Name="col_phone"/>
-                <DataGridTextColumn Header="Passport" x:Name="col_passport"/>
-            </DataGrid.Columns>
-
-
+        <DataGrid Grid.Column="1" Grid.Row="1" x:Name="datagrid_clients" SelectionChanged="datagrid_clients_SelectionChanged" CanUserReorderColumns="False" CanUserDeleteRows="False">
         </DataGrid>
 
         <StackPanel Grid.Column="2" Grid.Row="1" Margin=" 5 0">
