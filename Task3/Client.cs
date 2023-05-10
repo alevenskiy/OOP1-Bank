@@ -18,12 +18,11 @@ namespace Task3
         public string secondName { set; get; }
         public string phone { set; get; }
         public string passport { set; get; }
-
-        public DateTime editTime { set; get; }
-        public List<string> editedData { set; get; }
-        public List<string> editType { set; get; }
-        public string editUser { set; get; }
-
+        public string surnameEdit { set; get; }
+        public string nameEdit { set; get; }
+        public string secondNameEdit { set; get; }
+        public string phoneEdit { set; get; }
+        public string passportEdit { set; get; }
 
         public Client() 
         {
@@ -33,18 +32,19 @@ namespace Task3
             phone = string.Empty;
             passport = string.Empty;
 
-            editTime = DateTime.Now;
-            editedData = new List<string>();
-            editType = new List<string>();
-            editUser = string.Empty;
+            surnameEdit = "";
+            nameEdit = "";
+            secondNameEdit = string.Empty;
+            phoneEdit = string.Empty;
+            passportEdit = string.Empty;
 
         }
 
-        public Client Deserialize(string path)
-        {
-            string str = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<Client>(str);
-        }
+        //public Client Deserialize(string path)
+        //{
+        //    string str = File.ReadAllText(path);
+        //    return JsonConvert.DeserializeObject<Client>(str);
+        //}
 
         public JObject Serialize(/*string path*/)
         {
@@ -54,7 +54,14 @@ namespace Task3
             jObject["secondName"] = secondName;
             jObject["phoneNumber"] = phone;
             jObject["passportNumber"] = passport;
-            jObject["editTime"] = editTime;
+
+            jObject["surnameEdit"] = surnameEdit;
+            jObject["nameEdit"] = nameEdit;
+            jObject["secondNameEdit"] = secondNameEdit;
+            jObject["phoneEdit"] = phoneEdit;
+            jObject["passportEdit"] = passportEdit;
+
+            /*jObject["editTime"] = editTime;
 
             JArray editedDatas = new JArray();
             JArray editTypes = new JArray();
@@ -70,6 +77,7 @@ namespace Task3
 
             //string json = jObject.ToString();
             //File.WriteAllText(path, json);
+            */
 
             return jObject;
         }

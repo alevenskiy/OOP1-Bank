@@ -22,42 +22,94 @@ namespace Task3
     {
         Consultant consultant;
         Manager manager;
-        bool isConsultant = false;
+
+        string path = "clients.json";
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Butt_Download_Click(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            combobox_employees.Items.Clear();
+            combobox_employees.Items.Add("Manager");
+            combobox_employees.Items.Add("Client");
+
+            Refresh();
         }
 
-        private void Butt_Save_Click(object sender, RoutedEventArgs e)
+        private void Refresh()
         {
+            ComboboxClientsRefresh(path);
 
-        }
-
-        private void ComboBox_Position_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (ComboBox_Position.SelectedIndex == 0)
+            if (combobox_employees.SelectedIndex == 0)
             {
-                if (consultant == null)
-                    consultant = new Consultant(this);
-                isConsultant = true;
+                butt_add.IsEnabled = true;
+
+                if(checkbox_editable.IsChecked != true)
+                {
+                    TextBoxesSet(false);
+                }
+                else
+                {
+                    TextBoxesSet(true);
+                }
             }
-            else
+            else if(combobox_employees.SelectedIndex == 1)
             {
-                if (manager == null)
-                    manager = new Manager(this);
-                isConsultant = false;
+                butt_add.IsEnabled = false;
+
+                if (checkbox_editable.IsChecked != true)
+                {
+                    text_phone.IsEnabled = false;
+                }
+                else
+                {
+                    text_phone.IsEnabled = true;
+                }
             }
+
+            TextsSetEmpty();
         }
 
-        private void datagrid_clients_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        { 
+        private void ComboboxClientsRefresh(string path)
+        {
+            combobox_clients.Items.Clear();
 
+            List<string> clientsNames = new List<string>();
+
+            Clients clients = new Clients().Deserialize(path);
+
+            for (int i = 0; i < clients.list.Count; i++)
+            {
+                clientsNames.Add(clients.list[i].surname);
+            }
+
+            combobox_clients.ItemsSource = clientsNames;
+        }
+
+        private void TextBoxesSet(bool isEnabled)
+        {
+            text_surname.IsEnabled = isEnabled;
+            text_name.IsEnabled = isEnabled;
+            text_secondName.IsEnabled = isEnabled;
+            text_phone.IsEnabled = isEnabled;
+            text_passport.IsEnabled = isEnabled;
+        }
+
+        private void TextsSetEmpty()
+        {
+            text_surname.Text = "";
+            text_name.Text = "";
+            text_secondName.Text = "";
+            text_phone.Text = "";
+            text_passport.Text = "";
+            text_surnameEdit.Text = "";
+            text_nameEdit.Text = "";
+            text_secondNameEdit.Text = "";
+            text_phoneEdit.Text = "";
+            text_passportEdit.Text = "";
         }
     }
 }

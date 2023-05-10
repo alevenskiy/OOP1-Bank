@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid Background="LightYellow">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Grid Background="#FF7D7D7D">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -19,44 +19,109 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="Butt_Download" Grid.Column="0" Grid.Row="0" Content="Download Client" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="100" Click="Butt_Download_Click"/>
-
-        <ComboBox x:Name="ComboBox_Position" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200" SelectionChanged="ComboBox_Position_SelectionChanged" SelectedIndex="1" >
-            <TextBlock x:Name="Pos_Consultant" Text="Consultant"/>
-            <TextBlock x:Name="Pos_Manager" Text="Manager"/>
-        </ComboBox>
-
-        <DataGrid Grid.Column="1" Grid.Row="1" x:Name="datagrid_clients" SelectionChanged="datagrid_clients_SelectionChanged" CanUserReorderColumns="False" CanUserDeleteRows="False">
-        </DataGrid>
-
-        <StackPanel Grid.Column="2" Grid.Row="1" Margin=" 5 0">
-            <DockPanel>
-                <TextBlock Text="Last Edit Time"/>
-                <TextBlock x:Name="text_edittime" Text="Edit Time" HorizontalAlignment="Right"/>
-            </DockPanel>
-            <DockPanel>
-                <TextBlock Text="Edit Data"/>
-                <TextBlock x:Name="text_editdata" Text="Edit Data" HorizontalAlignment="Right"/>
-            </DockPanel>
-            <DockPanel>
-                <TextBlock Text="Edit Type"/>
-                <TextBlock x:Name="text_edittype" Text="Edit Type" HorizontalAlignment="Right"/>
-            </DockPanel>
-            <DockPanel>
-                <TextBlock Text="Edit User"/>
-                <TextBlock x:Name="text_edituser" Text="Edit User" HorizontalAlignment="Right"/>
-            </DockPanel>
+        <StackPanel Grid.Column="0" Grid.Row="0">
+            <ComboBox x:Name="combobox_employees" Margin="10,10,10,0" VerticalAlignment="Top"/>
         </StackPanel>
-        
-        <Button x:Name="Butt_Save" Grid.Column="0" Grid.Row="2" Content="Save Client" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="100" Click="Butt_Save_Click"/>
 
-        <Grid Grid.Row="2" Grid.Column="1" x:Name="grid_supp" Margin="10">
-            <Grid.Background>
-                <SolidColorBrush Color="#FFD52323" Opacity="0.5"/>
-            </Grid.Background>
+        <StackPanel Grid.Column="1" Grid.Row="0">
+            <ComboBox x:Name="combobox_clients" Margin="10,10,10,0" VerticalAlignment="Top"/>
+        </StackPanel>
 
-            <TextBlock x:Name="text_supp" Text="Error" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
-        </Grid>
+        <StackPanel Grid.Column="2" Grid.Row="0">
+            <DockPanel Margin="10" VerticalAlignment="Top">
+                <CheckBox x:Name="checkbox_editable" Margin="0, 0, 5, 0"/>
+                <TextBlock Text="Editable"/>
+            </DockPanel>
+
+            <Button x:Name="butt_add" Content="Create new Client" Grid.Column="2" Grid.Row="0" VerticalAlignment="Bottom" Margin="10 0"/>
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">
+
+            <Grid Background="LightYellow">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+
+            <DockPanel Margin="10 5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Surname" Grid.Column="0"/>
+                    <TextBlock x:Name="text_surnameEdit" Grid.Column="2" Text="Add by Manager at 00:00 12/05"/>
+                    <TextBox x:Name="text_surname" Text="Client Surname" Margin="10 0" Grid.Column="1"/>
+
+                </Grid>
+                </DockPanel>
+            <DockPanel Margin="10 5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Name" Grid.Column="0"/>
+                    <TextBlock x:Name="text_nameEdit" Text="Edit by Consultant at 11:00 12/05" Grid.Column="2"/>
+                    <TextBox x:Name="text_name" Text="Client Surname" Margin="10 0" Grid.Column="1"/>
+
+                </Grid>
+            </DockPanel>
+            <DockPanel Margin="10 5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Second Name" Grid.Column="0"/>
+                    <TextBlock x:Name="text_secondNameEdit" Text="Add by Employee at 00:00 12/05" Grid.Column="2"/>
+                    <TextBox x:Name="text_secondName" Text="Client Surname" Margin="10 0" Grid.Column="1"/>
+                </Grid>
+            </DockPanel>
+            <DockPanel Margin="10 5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Phone" Grid.Column="0"/>
+                    <TextBlock x:Name="text_phoneEdit" Text="Add by Employee at 00:00 12/05" Grid.Column="2"/>
+                    <TextBox x:Name="text_phone" Text="Client Surname" Margin="10 0" Grid.Column="1"/>
+                </Grid>
+            </DockPanel>
+            <DockPanel Margin="10 5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Passport" Grid.Column="0"/>
+                    <TextBlock x:Name="text_passportEdit" Text="Add by Employee at 00:00 12/05" Grid.Column="2"/>
+                    <TextBox x:Name="text_passport" Text="Client Surname" Margin="10 0" Grid.Column="1"/>
+                </Grid>
+            </DockPanel>
+            
+        </StackPanel>
+
+        <Button x:Name="butt_save" Content="Save" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Width="100"/>
+        <CheckBox Grid.Column="2" Content="CheckBox" HorizontalAlignment="Left" Margin="294,80,0,0" Grid.Row="2" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
