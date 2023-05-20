@@ -18,6 +18,13 @@ namespace Task3
     {
         Clients clients;
 
+        MainWindow mainWindow;
+
+        public Employee(MainWindow mainWindow)
+        {
+            this.mainWindow = mainWindow;
+        }
+
         public Clients GetClients()
         {
             return clients.Deserialize("clients.json");

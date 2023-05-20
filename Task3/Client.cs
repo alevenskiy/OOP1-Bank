@@ -13,6 +13,7 @@ namespace Task3
 {
     public class Client
     {
+        //private int id; ----------
         public string surname { set; get; }
         public string name { set; get; }
         public string secondName { set; get; }
@@ -26,58 +27,34 @@ namespace Task3
 
         public Client() 
         {
-            surname = "";
-            name = "";
+            surname = string.Empty;
+            name = string.Empty;
             secondName = string.Empty;
             phone = string.Empty;
             passport = string.Empty;
 
-            surnameEdit = "";
-            nameEdit = "";
+            surnameEdit = string.Empty;
+            nameEdit = string.Empty;
             secondNameEdit = string.Empty;
             phoneEdit = string.Empty;
             passportEdit = string.Empty;
 
         }
 
-        //public Client Deserialize(string path)
-        //{
-        //    string str = File.ReadAllText(path);
-        //    return JsonConvert.DeserializeObject<Client>(str);
-        //}
-
-        public JObject Serialize(/*string path*/)
+        public JObject Serialize()
         {
             JObject jObject = new JObject();
             jObject["surname"] = surname;
             jObject["name"] = name;
             jObject["secondName"] = secondName;
-            jObject["phoneNumber"] = phone;
-            jObject["passportNumber"] = passport;
+            jObject["phone"] = phone;
+            jObject["passport"] = passport;
 
             jObject["surnameEdit"] = surnameEdit;
             jObject["nameEdit"] = nameEdit;
             jObject["secondNameEdit"] = secondNameEdit;
             jObject["phoneEdit"] = phoneEdit;
             jObject["passportEdit"] = passportEdit;
-
-            /*jObject["editTime"] = editTime;
-
-            JArray editedDatas = new JArray();
-            JArray editTypes = new JArray();
-            for(int i = 0; i < editedData.Count; i++)
-            {
-                editedDatas.Add(editedData[i]);
-                editTypes.Add(editType[i]);
-            }
-            jObject["editedData"] = editedDatas;
-            jObject["editedType"] = editTypes;
-
-            jObject["editUser"] = editUser;
-
-            //string json = jObject.ToString();
-            //File.WriteAllText(path, json);
-            */
 
             return jObject;
         }
@@ -92,6 +69,11 @@ namespace Task3
             list = new List<Client>();
         }
 
+        public Clients(List<Client> list)
+        {
+            this.list = list;
+        }
+
         public Clients Deserialize(string path)
         {
             string str = "";
@@ -102,10 +84,14 @@ namespace Task3
             }
             catch
             {
-                MessageBox.Show("Файл не открывается");
+                MessageBox.Show("File does not open");
             }
 
-            return JsonConvert.DeserializeObject<Clients>(str);
+            List<Client> clientList = JsonConvert.DeserializeObject<List<Client>>(str);
+
+            Clients clients = new Clients(clientList);
+
+            return clients;
         }
 
         public void Serialize(string path)
@@ -118,7 +104,15 @@ namespace Task3
             }
 
             string json = array.ToString();
-            File.WriteAllText(path, json);
+
+            try
+            {
+                File.WriteAllText(path, json);
+            }
+            catch 
+            {
+                MessageBox.Show("File does not open");
+            }
         }
     }
 }

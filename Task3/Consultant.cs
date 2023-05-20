@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace Task3
 {
-    internal class Consultant
+    internal class Consultant : Employee
     {
 
         protected Clients clients;
@@ -17,27 +17,9 @@ namespace Task3
         protected string[] changedType = null;
 
 
-        public Consultant(MainWindow mainWindow)
-        {
-            this.mainWindow = mainWindow;
-        }
+        public Consultant(MainWindow mainWindow) : base(mainWindow) { }
 
-        public Clients GetClients()
-        {
-            if(clients == null)
-            {
-                clients = new Clients().Deserialize("client.json");
-            }
-
-            return clients;
-        }
-
-        public void SetClients()
-        {
-            clients.Serialize("client.json");
-        }
-
-        public bool PhoneNumberChange(Client client, string newPhone)
+        public bool PhoneChange(Client client, string newPhone)
         {
             if (newPhone == "")
             {
@@ -45,17 +27,13 @@ namespace Task3
             }
             else
             {
-                client.editTime = DateTime.Now;
-                client.editUser = "Client";
-                client.editedData.Add("Phone");
-
                 if (client.phone == "")
                 {
-                    client.editType.Add("Add");
+                    client.phoneEdit = "Add by Consultant at " + DateTime.Now.ToString();
                 }
                 else
                 {
-                    client.editType.Add("Change");
+                    client.phoneEdit = "Change by Consultant at " + DateTime.Now.ToString();
                 }
 
                 client.phone = newPhone;

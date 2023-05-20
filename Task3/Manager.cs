@@ -7,92 +7,93 @@ using System.Xml.Linq;
 
 namespace Task3
 {
-    internal class Manager : Consultant
+    internal class Manager : Employee
     {
-        public Manager(MainWindow mainWindow) : base(mainWindow)
-        {
-        }
+        public Manager(MainWindow mainWindow) : base(mainWindow) { }
 
         public void SurnameChange(Client client, string surname)
         {
-            client.editTime = DateTime.Now;
-            client.editUser = "Manager";
-            client.editedData.Add("Surname");
-
             if(surname == "")
             {
-                client.editType.Add("delete");
+                client.surnameEdit = "Delete by Manager at " + DateTime.Now.ToString();
             }
             else if(client.surname == "")
             {
-                client.editType.Add("add");
+                client.surnameEdit = "Add by Manager at " + DateTime.Now.ToString();
             }
             else
             {
-                client.editType.Add("change");
+                client.surnameEdit = "Change by Manager at " + DateTime.Now.ToString();
             }
 
             client.surname = surname;
         }
         public void NameChange(Client client, string name)
         {
-            client.editTime = DateTime.Now;
-            client.editUser = "Manager";
-            client.editedData.Add("Name");
-
             if (name == "")
             {
-                client.editType.Add("delete");
+                client.nameEdit = "Delete by Manager at " + DateTime.Now.ToString();
             }
             else if (client.name == "")
             {
-                client.editType.Add("add");
+                client.nameEdit = "Add by Manager at " + DateTime.Now.ToString();
             }
             else
             {
-                client.editType.Add("change");
+                client.nameEdit = "Change by Manager at " + DateTime.Now.ToString();
             }
 
             client.name = name;
         }
         public void SecondnameChange(Client client, string secondname)
         {
-            client.editTime = DateTime.Now;
-            client.editUser = "Manager";
-            client.editedData.Add("Second Name");
-
             if (secondname == "")
             {
-                client.editType.Add("delete");
+                client.secondNameEdit = "Delete by Manager at " + DateTime.Now.ToString();
             }
             else if (client.secondName == "")
             {
-                client.editType.Add("add");
+                client.secondNameEdit = "Add by Manager at " + DateTime.Now.ToString();
             }
             else
             {
-                client.editType.Add("change");
+                client.secondNameEdit = "Chenge by Manager at " + DateTime.Now.ToString();
             }
 
             client.secondName = secondname;
         }
-        public void PassportChange(Client client, string passport)
-        {
-            client.editTime = DateTime.Now;
-            client.editUser = "Manager";
-            client.editedData.Add("Passport");
 
-            if (passport == "")
+        public void PhoneChange(Client client, string phone)
+        {
+            if (phone == "")
             {
-                client.editType.Add("delete");
+                client.phoneEdit = "Delete by Manager at " + DateTime.Now.ToString();
             }
-            else if (client.passport == "")
+            else if (client.phone == "")
             {
-                client.editType.Add("add");
+                client.phoneEdit = "Add by Manager at " + DateTime.Now.ToString();
             }
             else
             {
-                client.editType.Add("change");
+                client.phoneEdit = "Change by Manager at " + DateTime.Now.ToString();
+            }
+
+            client.phone = phone;
+        }
+
+        public void PassportChange(Client client, string passport)
+        {
+            if (passport == "")
+            {
+                client.passportEdit = "Delete by Manager at " + DateTime.Now.ToString();
+            }
+            else if (client.passport == "")
+            {
+                client.passportEdit = "Add by Manager at " + DateTime.Now.ToString();
+            }
+            else
+            {
+                client.passportEdit = "Change by Manager at " + DateTime.Now.ToString();
             }
 
             client.passport = passport;
