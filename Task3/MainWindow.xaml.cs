@@ -21,13 +21,9 @@ namespace Task3
     /// </summary>
     public partial class MainWindow : Window
     {
-        Consultant consultant;
-        Manager manager;
 
         Clients windowClients;
         Client currentClient;
-
-        //string path = "clients.json";
 
         public MainWindow()
         {
@@ -41,59 +37,57 @@ namespace Task3
 
         private void Refresh()
         {
-            if (File.Exists("clients.json"))
-            {
-
-                ComboboxClientsRefresh("clients.json");
-
-                butt_cancel.Visibility = Visibility.Collapsed; // creating mod off
-                butt_save.Content = "Save";
-                checkbox_editable.IsChecked = false;
-
-                if (combobox_employees.SelectedIndex == 0) //manager
-                {
-                    butt_create.IsEnabled = true;
-                    checkbox_editable.IsEnabled = true;
-                    combobox_clients.IsEnabled = true;
-
-                    if (checkbox_editable.IsChecked != true)
-                    {
-                        TextBoxesSet(false);
-                    }
-                    else
-                    {
-                        TextBoxesSet(true);
-                    }
-                }
-                else if (combobox_employees.SelectedIndex == 1) //consultant
-                {
-                    butt_create.IsEnabled = false;
-                    checkbox_editable.IsEnabled = true;
-                    combobox_clients.IsEnabled = true;
-
-                    if (checkbox_editable.IsChecked != true)
-                    {
-                        text_phone.IsEnabled = false;
-                    }
-                    else
-                    {
-                        text_phone.IsEnabled = true;
-                    }
-                }
-                else
-                {
-                    TextBoxesSet(false);
-                    checkbox_editable.IsEnabled = false;
-                    butt_create.IsEnabled = false;
-                    combobox_clients.IsEnabled = false;
-                }
-
-                TextsSetEmpty();
-            }
-            else
+            if (!File.Exists("clients.json"))
             {
                 File.Create("clients.json");
             }
+
+            ComboboxClientsRefresh("clients.json");
+
+            butt_cancel.Visibility = Visibility.Collapsed; // creating mod off
+            butt_save.Content = "Save";
+            checkbox_editable.IsChecked = false;
+
+            if (combobox_employees.SelectedIndex == 0) //manager
+            {
+                butt_create.IsEnabled = true;
+                checkbox_editable.IsEnabled = true;
+                combobox_clients.IsEnabled = true;
+
+                if (checkbox_editable.IsChecked != true)
+                {
+                    TextBoxesSet(false);
+                }
+                else
+                {
+                    TextBoxesSet(true);
+                }
+            }
+            else if (combobox_employees.SelectedIndex == 1) //consultant
+            {
+                butt_create.IsEnabled = false;
+                checkbox_editable.IsEnabled = true;
+                combobox_clients.IsEnabled = true;
+
+                if (checkbox_editable.IsChecked != true)
+                {
+                    text_phone.IsEnabled = false;
+                }
+                else
+                {
+                    text_phone.IsEnabled = true;
+                }
+            }
+            else
+            {
+                TextBoxesSet(false);
+                checkbox_editable.IsEnabled = false;
+                butt_create.IsEnabled = false;
+                combobox_clients.IsEnabled = false;
+            }
+
+            TextsSetEmpty();
+
         }
 
         private void ComboboxClientsRefresh(string path)
@@ -345,7 +339,7 @@ namespace Task3
                 }
                 else
                 {
-                    text_phone.IsEnabled = false;
+                    TextBoxesSet(false);
                 }
             }
         }
