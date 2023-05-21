@@ -10,35 +10,21 @@ namespace Task3
 {
     internal class Consultant : Employee
     {
+        public Consultant() : base() { }
 
-        protected Clients clients;
-        protected MainWindow mainWindow;
-        protected string[] changedData = null;
-        protected string[] changedType = null;
-
-
-        public Consultant(MainWindow mainWindow) : base(mainWindow) { }
-
-        public bool PhoneChange(Client client, string newPhone)
+        public Client PhoneChange(Client client, string phone)
         {
-            if (newPhone == "")
+            if (client.phone == "")
             {
-                return false;
+                client.phoneEdit = "Add by Consultant at " + DateTime.Now.ToString();
             }
-            else
+            else if (client.phone != phone)
             {
-                if (client.phone == "")
-                {
-                    client.phoneEdit = "Add by Consultant at " + DateTime.Now.ToString();
-                }
-                else
-                {
-                    client.phoneEdit = "Change by Consultant at " + DateTime.Now.ToString();
-                }
+                client.phoneEdit = "Change by Consultant at " + DateTime.Now.ToString();
+            }
+            client.phone = phone;
 
-                client.phone = newPhone;
-                return true;
-            }
+            return client;
         }
     }
 }

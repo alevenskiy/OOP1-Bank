@@ -25,8 +25,9 @@ namespace Task3
         Manager manager;
 
         Clients windowClients;
+        Client currentClient;
 
-        string path = "clients.json";
+        //string path = "clients.json";
 
         public MainWindow()
         {
@@ -40,14 +41,18 @@ namespace Task3
 
         private void Refresh()
         {
-            if (File.Exists(path))
+            if (File.Exists("clients.json"))
             {
 
-                ComboboxClientsRefresh(path);
+                ComboboxClientsRefresh("clients.json");
+
+                butt_cancel.Visibility = Visibility.Collapsed; // creating mod off
+                butt_save.Content = "Save";
+                checkbox_editable.IsChecked = false;
 
                 if (combobox_employees.SelectedIndex == 0) //manager
                 {
-                    butt_add.IsEnabled = true;
+                    butt_create.IsEnabled = true;
                     checkbox_editable.IsEnabled = true;
                     combobox_clients.IsEnabled = true;
 
@@ -62,7 +67,7 @@ namespace Task3
                 }
                 else if (combobox_employees.SelectedIndex == 1) //consultant
                 {
-                    butt_add.IsEnabled = false;
+                    butt_create.IsEnabled = false;
                     checkbox_editable.IsEnabled = true;
                     combobox_clients.IsEnabled = true;
 
@@ -79,7 +84,7 @@ namespace Task3
                 {
                     TextBoxesSet(false);
                     checkbox_editable.IsEnabled = false;
-                    butt_add.IsEnabled = false;
+                    butt_create.IsEnabled = false;
                     combobox_clients.IsEnabled = false;
                 }
 
@@ -87,7 +92,7 @@ namespace Task3
             }
             else
             {
-                File.Create(path);
+                File.Create("clients.json");
             }
         }
 
@@ -101,7 +106,7 @@ namespace Task3
 
             windowClients = clients;
 
-            if (clients != null)
+            if (/*clients != null && */clients.list != null)
             {
                 for (int i = 0; i < clients.list.Count; i++)
                 {
@@ -149,6 +154,9 @@ namespace Task3
         {
             checkbox_editable.IsChecked = true;
 
+            butt_cancel.Visibility = Visibility.Visible; // creating mod on
+            butt_save.Content = "Add and Save";
+
             TextsSetEmpty();
         }
 
@@ -158,38 +166,97 @@ namespace Task3
             {
                 MessageBox.Show("All fields must be filled in");
             }
-            else if (DuplicateClientSurname(text_surname.Text))
-            {
-                MessageBox.Show("Client with this Surname is already in base");
-            }
+            //else if (DuplicateClientSurname(text_surname.Text))
+            //{
+            //    MessageBox.Show("Client with this Surname is already in base");
+            //}
             else
             {
+                Employee emp;
+
+                if (combobox_employees.SelectedIndex == 0)
+                {
+                    emp = new Manager();
+                }
+                else
+                {
+                    emp = new Consultant();
+                }
+
+                Clients clients = emp.GetClients();
+
                 Client client = new Client();
 
-                client.surname = text_surname.Text;
-                client.name = text_name.Text;
-                client.secondName = text_secondName.Text;
-                client.phone = text_phone.Text;
-                client.passport = text_passport.Text;
-
-                client.surnameEdit = "Add by Manager at " + DateTime.Now.ToString();
-                client.nameEdit = "Add by Manager at " + DateTime.Now.ToString();
-                client.secondNameEdit = "Add by Manager at " + DateTime.Now.ToString();
-                client.phoneEdit = "Add by Manager at " + DateTime.Now.ToString();
-                client.passportEdit = "Add by Manager at " + DateTime.Now.ToString();
-
-                Clients clients = new Clients().Deserialize(path);
-
-                if (clients == null)
+                if (clients.list == null || clients.list.Count == 0) //creating mod check
                 {
                     clients = new Clients();
                 }
+                else if (butt_cancel.Visibility == Visibility.Visible) //adding mod check
+                {
+                    client.id = clients.list[clients.list.Count - 1].id + 1;
+                }
+                else //editing
+                {
+                    client = currentClient;
+                }
 
-                clients.list.Add(client);
+                //if (butt_cancel.Visibility == Visibility.Visible) //creating mod check
+                //{
+                //    client = (emp as Manager).SurnameChange(client, text_surname.Text);
+                //    client = (emp as Manager).NameChange(client, text_name.Text);
+                //    client = (emp as Manager).SecondNameChange(client, text_secondName.Text);
+                //    client = (emp as Manager).PhoneChange(client, text_phone.Text);
+                //    client = (emp as Manager).PassportChange(client, text_passport.Text);
 
-                clients.Serialize(path);
+
+                //    //client.surname = text_surname.Text;
+                //    //client.name = text_name.Text;
+                //    //client.secondName = text_secondName.Text;
+                //    //client.phone = text_phone.Text;
+                //    //client.passport = text_passport.Text;
+
+                //    //client.surnameEdit = "Add by Manager at " + DateTime.Now.ToString();
+                //    //client.nameEdit = "Add by Manager at " + DateTime.Now.ToString();
+                //    //client.secondNameEdit = "Add by Manager at " + DateTime.Now.ToString();
+                //    //client.phoneEdit = "Add by Manager at " + DateTime.Now.ToString();
+                //    //client.passportEdit = "Add by Manager at " + DateTime.Now.ToString();
+                //}
+                //else
+                //{
+                if (combobox_employees.SelectedIndex == 0)
+                {
+                    client = (emp as Manager).SurnameChange(client, text_surname.Text);
+                    client = (emp as Manager).NameChange(client, text_name.Text);
+                    client = (emp as Manager).SecondNameChange(client, text_secondName.Text);
+                    client = (emp as Manager).PhoneChange(client, text_phone.Text);
+                    client = (emp as Manager).PassportChange(client, text_passport.Text);
+                }
+                else
+                {
+                    client = (emp as Consultant).PhoneChange(client, text_phone.Text);
+                }
+                //}
+
+                if (butt_cancel.Visibility == Visibility.Visible)
+                {
+                    clients.list.Add(client);
+                }
+                else
+                {
+                    for(int i = 0; i < clients.list.Count; i++)
+                    {
+                        if(clients.list[i].id == client.id)
+                        {
+                            clients.list.Remove(clients.list[i]);
+                            clients.list.Insert(i, client);
+                        }
+                    }
+                }
+
+                clients.Serialize("clients.json");
 
                 MessageBox.Show("Save complete");
+
 
                 Refresh();
             }
@@ -221,7 +288,43 @@ namespace Task3
             return false;
         }
 
-        private void checkbox_editable_Click(object sender, RoutedEventArgs e)
+        private void combobox_clients_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (Client client in windowClients.list)
+            {
+                if (combobox_clients.SelectedItem != null)
+                {
+                    if (combobox_clients.SelectedItem.ToString() == client.surname)
+                    {
+                        currentClient = client;
+                        ShowClient(client);
+                        return;
+                    }
+                }
+            }
+        }
+
+        private void ShowClient(Client client)
+        {
+            text_surname.Text = client.surname;
+            text_name.Text = client.name;
+            text_secondName.Text = client.secondName;
+            text_phone.Text = client.phone;
+            text_passport.Text = client.passport;
+
+            text_surnameEdit.Text = client.surnameEdit;
+            text_nameEdit.Text = client.nameEdit;
+            text_secondNameEdit.Text = client.secondNameEdit;
+            text_phoneEdit.Text = client.phoneEdit;
+            text_passportEdit.Text = client.passportEdit;
+        }
+
+        private void butt_cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+        }
+
+        private void checkbox_editable_Checked(object sender, RoutedEventArgs e)
         {
             if (combobox_employees.SelectedIndex == 0) //manager
             {
@@ -245,36 +348,6 @@ namespace Task3
                     text_phone.IsEnabled = false;
                 }
             }
-        }
-
-        private void combobox_clients_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            foreach (Client client in windowClients.list)
-            {
-                if (combobox_clients.SelectedItem != null)
-                {
-                    if (combobox_clients.SelectedItem.ToString() == client.surname)
-                    {
-                        ShowClient(client);
-                        return;
-                    }
-                }
-            }
-        }
-
-        private void ShowClient(Client client)
-        {
-            text_surname.Text = client.surname;
-            text_name.Text = client.name;
-            text_secondName.Text = client.secondName;
-            text_phone.Text = client.phone;
-            text_passport.Text = client.passport;
-
-            text_surnameEdit.Text = client.surnameEdit;
-            text_nameEdit.Text = client.nameEdit;
-            text_secondNameEdit.Text = client.secondNameEdit;
-            text_phoneEdit.Text = client.phoneEdit;
-            text_passportEdit.Text = client.passportEdit;
         }
     }
 }

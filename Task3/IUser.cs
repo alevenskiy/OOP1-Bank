@@ -18,11 +18,9 @@ namespace Task3
     {
         Clients clients;
 
-        MainWindow mainWindow;
-
-        public Employee(MainWindow mainWindow)
+        public Employee() 
         {
-            this.mainWindow = mainWindow;
+            clients = new Clients();
         }
 
         public Clients GetClients()
@@ -32,7 +30,7 @@ namespace Task3
 
         public void SetClients()
         {
-            clients.Serialize("client.json");
+            clients.Serialize("clients.json");
         }
     }
 }

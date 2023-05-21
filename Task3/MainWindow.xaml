@@ -32,7 +32,7 @@
 
         <StackPanel Grid.Column="2" Grid.Row="0">
             <DockPanel Margin="10" VerticalAlignment="Top">
-                <CheckBox x:Name="checkbox_editable" Margin="0, 0, 5, 0" Click="checkbox_editable_Click"/>
+                <CheckBox x:Name="checkbox_editable" Margin="0, 0, 5, 0" Checked="checkbox_editable_Checked" Unchecked="checkbox_editable_Checked"/>
                 <TextBlock Text="Editable"/>
             </DockPanel>
 
@@ -62,8 +62,8 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="4*"/>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Surname" Grid.Column="0"/>
                     <TextBlock x:Name="text_surnameEdit" Grid.Column="2" Text="Add by Manager at 00:00 12/05"/>
@@ -75,8 +75,8 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="4*"/>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Name" Grid.Column="0"/>
                     <TextBlock x:Name="text_nameEdit" Text="Edit by Consultant at 11:00 12/05" Grid.Column="2"/>
@@ -88,8 +88,8 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="4*"/>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Second Name" Grid.Column="0"/>
                     <TextBlock x:Name="text_secondNameEdit" Text="Add by Employee at 00:00 12/05" Grid.Column="2"/>
@@ -100,8 +100,8 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="4*"/>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Phone" Grid.Column="0"/>
                     <TextBlock x:Name="text_phoneEdit" Text="Add by Employee at 00:00 12/05" Grid.Column="2"/>
@@ -112,8 +112,8 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="4*"/>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Passport" Grid.Column="0"/>
                     <TextBlock x:Name="text_passportEdit" Text="Add by Employee at 00:00 12/05" Grid.Column="2"/>
@@ -125,11 +125,8 @@
 
         <Button x:Name="butt_save" Content="Save" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Width="100" Click="butt_save_Click"/>
 
-        <DockPanel Grid.Column="1" Grid.Row="2" >
-            <Button x:Name="cancel_add" Content="Cancel Addition" Height="50" Width="100" DockPanel.Dock="Right" />
-            <Button x:Name="butt_add" Content="Add and Save" Height="50" Width="100" DockPanel.Dock="Right"/>
-            
-        </DockPanel>
+        <Button x:Name="butt_cancel" Content="Cancel Creating" Height="50" Grid.Column="2" Grid.Row="2"  Width="100" DockPanel.Dock="Right" Click="butt_cancel_Click" />
+
         
         
     </Grid>

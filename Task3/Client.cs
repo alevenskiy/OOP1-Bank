@@ -13,7 +13,7 @@ namespace Task3
 {
     public class Client
     {
-        //private int id; ----------
+        public int id { set; get; }
         public string surname { set; get; }
         public string name { set; get; }
         public string secondName { set; get; }
@@ -27,6 +27,8 @@ namespace Task3
 
         public Client() 
         {
+            id = 0;
+
             surname = string.Empty;
             name = string.Empty;
             secondName = string.Empty;
@@ -44,6 +46,7 @@ namespace Task3
         public JObject Serialize()
         {
             JObject jObject = new JObject();
+            jObject["id"] = id;
             jObject["surname"] = surname;
             jObject["name"] = name;
             jObject["secondName"] = secondName;
@@ -87,9 +90,7 @@ namespace Task3
                 MessageBox.Show("File does not open");
             }
 
-            List<Client> clientList = JsonConvert.DeserializeObject<List<Client>>(str);
-
-            Clients clients = new Clients(clientList);
+            Clients clients = new Clients(JsonConvert.DeserializeObject<List<Client>>(str));
 
             return clients;
         }

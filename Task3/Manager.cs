@@ -9,94 +9,82 @@ namespace Task3
 {
     internal class Manager : Employee
     {
-        public Manager(MainWindow mainWindow) : base(mainWindow) { }
+        public Manager() : base() { }
 
-        public void SurnameChange(Client client, string surname)
+        public Client SurnameChange(Client client, string surname)
         {
-            if(surname == "")
-            {
-                client.surnameEdit = "Delete by Manager at " + DateTime.Now.ToString();
-            }
-            else if(client.surname == "")
+            if(client.surname == "")
             {
                 client.surnameEdit = "Add by Manager at " + DateTime.Now.ToString();
             }
-            else
+            else if (client.surname != surname)
             {
                 client.surnameEdit = "Change by Manager at " + DateTime.Now.ToString();
             }
 
             client.surname = surname;
+
+            return client;
         }
-        public void NameChange(Client client, string name)
+        public Client NameChange(Client client, string name)
         {
-            if (name == "")
-            {
-                client.nameEdit = "Delete by Manager at " + DateTime.Now.ToString();
-            }
-            else if (client.name == "")
+            if (client.name == "")
             {
                 client.nameEdit = "Add by Manager at " + DateTime.Now.ToString();
             }
-            else
+            else if (client.name != name)
             {
                 client.nameEdit = "Change by Manager at " + DateTime.Now.ToString();
             }
 
             client.name = name;
+
+            return client;
         }
-        public void SecondnameChange(Client client, string secondname)
+        public Client SecondNameChange(Client client, string secondname)
         {
-            if (secondname == "")
-            {
-                client.secondNameEdit = "Delete by Manager at " + DateTime.Now.ToString();
-            }
-            else if (client.secondName == "")
+            if (client.secondName == "")
             {
                 client.secondNameEdit = "Add by Manager at " + DateTime.Now.ToString();
             }
-            else
+            else if (client.secondName != secondname)
             {
                 client.secondNameEdit = "Chenge by Manager at " + DateTime.Now.ToString();
             }
 
             client.secondName = secondname;
-        }
 
-        public void PhoneChange(Client client, string phone)
+            return client;
+        }
+        public Client PhoneChange(Client client, string phone)
         {
-            if (phone == "")
-            {
-                client.phoneEdit = "Delete by Manager at " + DateTime.Now.ToString();
-            }
-            else if (client.phone == "")
+            if (client.phone == "")
             {
                 client.phoneEdit = "Add by Manager at " + DateTime.Now.ToString();
             }
-            else
+            else if(client.phone != phone)
             {
                 client.phoneEdit = "Change by Manager at " + DateTime.Now.ToString();
             }
 
             client.phone = phone;
-        }
 
-        public void PassportChange(Client client, string passport)
+            return client;
+        }
+        public Client PassportChange(Client client, string passport)
         {
-            if (passport == "")
-            {
-                client.passportEdit = "Delete by Manager at " + DateTime.Now.ToString();
-            }
-            else if (client.passport == "")
+            if (client.passport == "")
             {
                 client.passportEdit = "Add by Manager at " + DateTime.Now.ToString();
             }
-            else
+            else if (client.passport != passport)
             {
                 client.passportEdit = "Change by Manager at " + DateTime.Now.ToString();
             }
 
             client.passport = passport;
+
+            return client;
         }
     }
 }
